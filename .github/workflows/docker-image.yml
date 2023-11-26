@@ -32,7 +32,7 @@ jobs:
       run: ./gradlew clean build -x test
 
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(git rev-parse --short "$GITHUB_SHA")
+      run: docker build . --file Dockerfile --tag docker.io/${{ secrets.DOCKERHUB_USERNAME }}/sampleapp:$(git rev-parse --short HEAD)
 
     - name: Push Docker image
-      run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/sampleapp-${git rev-parse --short HEAD}:sampleapp-${git rev-parse --short HEAD}
+      run: docker push docker.io/${{ secrets.DOCKERHUB_USERNAME }}/sampleapp:${git rev-parse --short HEAD}
